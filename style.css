@@ -1,0 +1,20 @@
+#container {
+    width: 800px;
+    height: 800px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+    gap: 1px;
+    
+}
+
+.boxes {
+
+    background-color: blue;
+    height: 100%;
+    width: 100%;
+    
+}
+
+
