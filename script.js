@@ -15,10 +15,15 @@ function changeColour() {
     const boxes = document.querySelectorAll(".boxes");
     boxes.forEach(box => {
         box.addEventListener("mouseover", function(e) {
+            randomColour(box);            
             e.target.classList.add("color");
-        }
-        )
+        })
     })
+}
+
+function randomColour(box) {
+    let colour = "#" + Math.floor(Math.random()*16777215).toString(16);
+    box.style.setProperty("--box-colour", colour);
 }
 
 makeGrid()
@@ -42,4 +47,6 @@ button.addEventListener("click", function() {
     changeColour();
 
 })
+
+let boxColour = Math.floor(Math.random()*16777215).toString(16);
 

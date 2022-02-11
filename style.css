@@ -1,5 +1,7 @@
 html {
     --grid-number: 16;
+    --grid-colour: white;
+    --box-colour: black;
 }
 
 #container {
@@ -10,17 +12,19 @@ html {
     grid-template-columns: repeat(var(--grid-number), 1fr);
     grid-template-rows: repeat(var(--grid-number), 1fr);
     gap: 1px;
+    border-style: solid;
+    border-color: black;
     
 }
 
 .boxes {
 
-    background-color: blue;
+    background-color: var(--grid-colour);
     height: 100%;
     width: 100%;
     
 }
 
 .color {
-    background-color: blueviolet;
+    background-color: var(--box-colour);
 }
