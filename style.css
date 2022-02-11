@@ -1,10 +1,14 @@
+html {
+    --grid-number: 16;
+}
+
 #container {
     width: 800px;
     height: 800px;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
+    grid-template-columns: repeat(var(--grid-number), 1fr);
+    grid-template-rows: repeat(var(--grid-number), 1fr);
     gap: 1px;
     
 }
