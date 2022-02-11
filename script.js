@@ -1,21 +1,17 @@
 const container = document.getElementById("container");
 
-let boxSize = 16;
+let gridSize = 16;
 
 function makeGrid() {
-    container.style.setProperty("--grid-number", boxSize);
-    for (let i = 0; i < (boxSize * boxSize); i++) {
+    container.style.setProperty("--grid-number", gridSize);
+    for (let i = 0; i < (gridSize * gridSize); i++) {
             let div = document.createElement("div");
             div.setAttribute("class", "boxes");
-            
             container.appendChild(div);  
     }
 }
 
-makeGrid()
-
-
-function colourfulBoxes() {
+function changeColour() {
     const boxes = document.querySelectorAll(".boxes");
     boxes.forEach(box => {
         box.addEventListener("mouseover", function(e) {
@@ -25,23 +21,25 @@ function colourfulBoxes() {
     })
 }
 
-colourfulBoxes()
+makeGrid()
+changeColour()
 
 const button = document.getElementById("restart") 
 
+// When button clicked, grid is reset, user is prompted for to input new grid size, new grid is made
 button.addEventListener("click", function() {
     const boxes = document.querySelectorAll(".boxes");
     boxes.forEach(box => {
         box.classList.remove("color");
     }) 
-    boxSize = prompt("Please choose a number from 2 - 100.", 16);
-    console.log(boxSize);
-    while (isNaN(boxSize) | boxSize < 2 | boxSize > 100) {
-        boxSize = prompt("Please choose a number from 2 - 100.", 16);
+    gridSize = prompt("Please choose a number from 2 - 100.", 16);
+    console.log(gridSize);
+    while (isNaN(gridSize) | gridSize < 2 | gridSize > 100) {
+        gridSize = prompt("Please choose a number from 2 - 100.", 16);
     }
     container.textContent = "";
     makeGrid();
-    colourfulBoxes();
+    changeColour();
 
 })
 
