@@ -12,9 +12,16 @@ const boxes = document.querySelectorAll(".boxes");
 
 boxes.forEach(box => {
      box.addEventListener("mouseover", function(e) {
-         console.log("hi");
-         e.target.style.backgroundColor = "purple";
+         e.target.classList.add("color");
      }
      )
  })
+
+const button = document.getElementById("restart") 
+
+button.addEventListener("click", function() {
+    boxes.forEach(box => {
+        box.classList.remove("color");
+    }) 
+})
 
