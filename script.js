@@ -34,9 +34,11 @@ function incrementHue() {
     return hue % 360;
 }
 
+let lightness = 50;
+
 // If the box colour variable is set to black, set it to a rainbow hue, else darken the existing hue
 function decideColour(box) {
-    let colour = `hsl(${incrementHue()}, 100%, 50%)`;
+    let colour = `hsl(${incrementHue()}, 100%, ${lightness}%)`;
     if (getComputedStyle(box).getPropertyValue("--box-colour") == "black") {
         box.style.setProperty("--box-colour", colour);
     } else {   
@@ -46,22 +48,22 @@ function decideColour(box) {
 
 // Grab the lightness from hsl value and lower it, then return adjusted hsl value
 function darkenHue(boxColour, darknessIncrement) {
-    let lightness = parseInt(boxColour.slice(-4, -2), 10);
-    if (lightness == 0) {
+    let light = parseInt(boxColour.slice(-4, -2), 10);
+    if (light < 10) {
         return boxColour;
     } else {
-        lightness = Math.max(lightness - darknessIncrement, 0);
-        return boxColour.slice(0, -4) + `${lightness}%)`;
+        light = Math.max(light - darknessIncrement, 0);
+        return boxColour.slice(0, -4) + `${light}%)`;
     }
 }
 
 makeGrid()
 changeColour()
 
-const button = document.getElementById("restart") 
+const restartButton = document.getElementById("restart") 
 
 // When button clicked, grid is reset, user is prompted for to input new grid size, new grid is made
-button.addEventListener("click", function() {
+restartButton.addEventListener("click", function() {
     const boxes = document.querySelectorAll(".boxes");
     boxes.forEach(box => {
         box.classList.remove("color");
@@ -74,6 +76,16 @@ button.addEventListener("click", function() {
     container.textContent = "";
     makeGrid();
     changeColour();
-
 })
 
+// Allow the user to choose between vivid or pastel colours
+const vividButton = document.getElementById("vivid");
+const pastelButton = document.getElementById("pastel");
+
+vividButton.addEventListener("click", function() {
+    lightness = 50;
+})
+
+pastelButton.addEventListener("click", function() {
+    lightness = 90;
+})
