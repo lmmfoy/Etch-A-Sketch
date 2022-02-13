@@ -1,5 +1,4 @@
 //to do -- colours don't work in chrome
-//switch to hsl to have rainbow
 //have pastel option
 
 const container = document.getElementById("container");
@@ -15,6 +14,7 @@ function makeGrid() {
     }
 }
 
+// Change box colour on mouseover
 function changeColour() {
     const boxes = document.querySelectorAll(".boxes");
     boxes.forEach(box => {
@@ -25,6 +25,7 @@ function changeColour() {
     })
 }
 
+// Increment to create rainbow colours (loop around when through)
 const hueIncrement = 10;
 let hue = 0;
 
@@ -33,35 +34,26 @@ function incrementHue() {
     return hue % 360;
 }
 
+// If the box colour variable is set to black, set it to a rainbow hue, else darken the existing hue
 function decideColour(box) {
-
     let colour = `hsl(${incrementHue()}, 100%, 50%)`;
-    console.log(colour);
     if (getComputedStyle(box).getPropertyValue("--box-colour") == "black") {
         box.style.setProperty("--box-colour", colour);
-    // } else {
-    //     box.style.setProperty("--box-colour", toRGB(box));
-    //     console.log(toRGB(box));
+    } else {   
+        box.style.setProperty("--box-colour", darkenHue(getComputedStyle(box).getPropertyValue("--box-colour"), 10));
     }
 }
 
-// function toRGB(box) {
-//     let r = 0, g = 0, b = 0;
-//     let boxColour = getComputedStyle(box).getPropertyValue("--box-colour");
-
-//     if (boxColour.length == 4) {
-//         r = "0x" + boxColour[1] + boxColour[1];
-//         g = "0x" + boxColour[2] + boxColour[2];
-//         b = "0x" + boxColour[3] + boxColour[3];
-//     } else if (boxColour.length == 7) {
-//         r = "0x" + boxColour[1] + boxColour[2];
-//         g = "0x" + boxColour[3] + boxColour[4];
-//         b = "0x" + boxColour[5] + boxColour[6];
-//     }
-
-//     return "rgb("+ (+r - 25.5) + "," + (+g - 25.5) + "," + (+b - 25.5) + ")";
-// }
-
+// Grab the lightness from hsl value and lower it, then return adjusted hsl value
+function darkenHue(boxColour, darknessIncrement) {
+    let lightness = parseInt(boxColour.slice(-4, -2), 10);
+    if (lightness == 0) {
+        return boxColour;
+    } else {
+        lightness = Math.max(lightness - darknessIncrement, 0);
+        return boxColour.slice(0, -4) + `${lightness}%)`;
+    }
+}
 
 makeGrid()
 changeColour()
