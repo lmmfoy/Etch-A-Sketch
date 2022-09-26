@@ -1,4 +1,4 @@
-# odin-etch-a-sketch
+Etch-a-sketch
 
 Colourful etch-a-sketch using vanilla JavaScript, HTML, CSS.
 
